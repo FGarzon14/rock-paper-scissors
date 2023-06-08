@@ -6,31 +6,58 @@ var computerScore = 0;
 
 
 function playRound(playerSelection) {
+let computerChoice;
 
-let computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
-if (!choices.includes(playerSelection)) {
-    alert("Invalid move");
-    return;
-}
+
+
+let randomChoice = Math.floor(Math.random() * choices.length);
+computerChoice = choices[randomChoice];
+
 
 if (playerSelection === computerChoice){
     alert("It's a tie!");
 }
- else if(playerSelection === "rock" && computerChoice === "paper" ||
+ else if(playerSelection === "rock" && computerChoice === "scissors" ||
          playerSelection === "paper" && computerChoice === "rock" ||
-         playerSelection === "rock" && computerChoice === "scissors") {
+         playerSelection === "scissors" && computerChoice === "paper") {
             console.log("You win!");
             playerScore++; 
          }
 
   else { 
-    console.log("You loose");
     computerScore++;
+
 }
 document.getElementById("playerScore").textContent = "Player has " + playerScore + " points";
 document.getElementById("computerScore").textContent = "Computer has " + computerScore + " points";
+
+if (playerScore === 5){
+    alertWin();
+} else if (computerScore === 5){
+    alertLoose();
 }
+
+function alertWin(){
+    alert("You won! Congratulations!");
+}
+
+function alertLoose(){
+    alert("You lost. Choose a move to try again.");
+}
+
+if (playerScore === 5 || computerScore === 5){
+  resetGame();
+}
+}
+
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+}
+
+
+
 
 
 const buttonRock = document.getElementById('buttonRock');
